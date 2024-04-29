@@ -19,3 +19,22 @@ o hacer el llamado a una función dentro del código HTML.-->
 <h2>{{ 'Hola Platzi' }}</h2>
 <p>la suma de 1 + 1 es {{ 1 + 1 }}</p>
 <p>Hola soy {{ name }} y mi edad es  {{ age }} </p>
+
+<!--Property Binding.
+Es la manera para controlar y modificar las propiedades de los distintos
+elementos de HTML. Para esto, simplemente utiliza los corchetes []
+para poder modificar dinámicamente ese atributo desde el controlador.
+Utilidades:
+-El atributo src de la etiqueta <img> para modificar dinámicamente una imagen.
+-El atributo href de un <a> para modificar un enlace.
+-El atributo value de un <input> para autocompletar un valor de un formulario.
+-El atributo disable de un <input> para habilitar/deshabilitar un campo
+de un formulario.-->
+<img [src]="person.avatar" alt="">
+<input type="number" [value] = "age" > <!--Enlazo una variable age a la propiedad [value] de un elemento, este elemento es input-->
+<button [disabled] = "disable"> Click me</button>
+
+<!--Para acceder a las propiedades del objeto person,
+es decir las variables declaradas en los componentes se realiza con
+un string interpolation -->
+<p> person: {{ person.name }} </p>

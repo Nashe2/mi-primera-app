@@ -15,4 +15,13 @@ export class LabsComponent {
   ];
   name = 'Mila';
   age = 27;
+  disable = true;
+  img = 'https://w3schools.com/howto/img_avatar.png';
+
+  //Declaro un objeto con sus propiedades
+  person = {
+    name : 'Nashe',
+    age: 18,
+    avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
 }
