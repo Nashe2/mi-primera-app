@@ -6,19 +6,17 @@ import { LabsComponent } from './pages/labs/labs.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent
+    path: '', //ruta
+    component: HomeComponent,
   },
   {
     path: 'labs',
-    component: LabsComponent
-  }
+    component: LabsComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
-
+export class AppRoutingModule {}
