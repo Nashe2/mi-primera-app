@@ -15,7 +15,7 @@ export class LabsComponent {
   ];
   name = 'Mila';
   age = 27;
-  disable = true;
+  disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
   //Declaro un objeto con sus propiedades
@@ -23,5 +23,15 @@ export class LabsComponent {
     name : 'Nashe',
     age: 18,
     avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
+
+  //Método de mostrar una alerta al dar click en el boton
+  clickHandler(){
+    alert('Hola')
+  }
+
+  //Método de evento, es para hacer un cambio en el input
+  changeHandler(event: Event){
+    console.log(event);
   }
 }
