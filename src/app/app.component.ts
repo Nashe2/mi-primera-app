@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mi-primera-app';
+  welcome = 'Bienvenido a mi primera aplicación Angular';
+  tasks = [
+    'Instalar el Angular CLI',
+    'Crear proyecto',
+    'Crear componentes'
+  ];
 }
