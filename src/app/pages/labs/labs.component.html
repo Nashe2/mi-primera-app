@@ -42,11 +42,20 @@ un string interpolation -->
   <p>person: {{ person.name }}</p>
 
   <hr />
+  <!--Método de mostrar una alerta al dar click en el boton-->
   <button (click)="clickHandler()">Click me</button>
   <!--Para doble click usamos la misma función solo cambiamos el elemento a dbclick-->
   <button (dblclick)="clickHandler()">doble me</button>
 
-  <!--Para un event usamos la función changeHandler y le pasamos la variable $event)-->
+  <!--Para un event de cambio usamos la función changeHandler y le pasamos la variable $event)-->
   <p>(change)</p>
   <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <!--El evento del teclado funcion keydownHandler trae la información al input
+  donde con reactividad cada que teclee algo la información del input irá cambiando sin necesidad de hacer enter)-->
+  <p>(keydown)</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+<!--Usar la funcion clickHandler en la función keydown nos esta permitiendo en nuestra
+logica que al teclear shitf + t nos muestre la alerta de Hola-->
+  <p>(keydown shitf t)</p>
+  <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
 </div>
