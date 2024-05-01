@@ -8,7 +8,8 @@
         placeholder="Type new todo"
         autofocus
         type="text"
-      />
+        (change)="changeHandler($event)"
+      /> <!--change es el cambio- funcion del evento-->
     </div>
   </header>
   <div class="container todoapp-wrapper">
@@ -20,11 +21,13 @@
         eliminando o reemplazando elementos.
         *ngIf te permite incluir un elemento en el DOM sólo si una condición específica es verdadera.
         *ngFor se utiliza para repetir un elemento del DOM para cada elemento de una lista. -->
-        <li *ngFor="let task of tasks()"> <!--Dirctiva de control o estructural-->
+        <li *ngFor="let task of tasks(); index as i"> <!--Dirctiva de control o estructural-->
+          <!--al *ngFor se le pone el index para pasar la posicion al método deleteTask(i)-->
           <div class="view">
             <input class="toggle" type="checkbox" />
             <label>{{ task }}</label>
-            <button class="destroy"></button>
+            <!--el elemento clisk se le asigna el método delete y se le pasa el parametro del indice-->
+            <button class="destroy" (click)="deleteTask(i)"></button>
           </div>
           <input class="edit" value="Buy a unicorn" />
         </li>
