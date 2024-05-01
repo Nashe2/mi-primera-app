@@ -8,7 +8,10 @@ import { Component, signal } from '@angular/core';
 export class LabsComponent {
   title = 'mi-primera-app';
   welcome = 'Bienvenido a mi primera aplicación Angular';
-  tasks = ['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes'];
+
+ //Array con signal para reactividad
+  tasks = signal(['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes']);
+
   name = signal('Mila');
   age = 27;
   disabled = true;

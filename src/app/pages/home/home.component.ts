@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  //Array con signal para reactividad
+  tasks = signal(['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes', 'Crear servicio']);
 }
