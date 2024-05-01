@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-labs',
@@ -9,7 +9,7 @@ export class LabsComponent {
   title = 'mi-primera-app';
   welcome = 'Bienvenido a mi primera aplicación Angular';
   tasks = ['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes'];
-  name = 'Mila';
+  name = signal('Mila');
   age = 27;
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
@@ -27,9 +27,18 @@ export class LabsComponent {
   }
 
   //Método de evento, es para hacer un cambio en el input
+  /*
   changeHandler(event: Event): void {
     console.log(event);
   }
+*/
+
+//Reactividad. Cambia dinamicamente el valor
+changeHandler(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const newValue = input.value;
+  this.name.set(newValue);
+}
 
   //El método keydonwHandler usa ese evento para que cada vez que teclee
   //en el teclado el evento traiga el target (la información) al input
@@ -39,3 +48,8 @@ export class LabsComponent {
     console.log(input.value);
   }
 }
+/*
+function Signal(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+*/
