@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrls: ['./labs.component.scss'],
 })
@@ -24,6 +28,16 @@ export class LabsComponent {
     age: 5,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   });
+
+  //Controller para el forms
+  colorCtrl = new FormControl;
+
+  //
+  constructor(){
+    this.colorCtrl.valueChanges.subscribe ( value => {
+      console.log(value)
+    });
+  }
 
   //Método de mostrar una alerta al dar click en el boton
   clickHandler(): void {

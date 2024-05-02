@@ -10,7 +10,7 @@ import { LabsComponent } from './pages/labs/labs.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    LabsComponent
+    //LabsComponent
   ],
   imports: [
     BrowserModule,
