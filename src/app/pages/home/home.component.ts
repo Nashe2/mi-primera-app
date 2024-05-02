@@ -9,7 +9,8 @@ import { Task } from './../../models/task.model';
 })
 export class HomeComponent {
   //Array con signal para reactividad
-  tasks = signal<Task[]>([ //Tipar la senial para saber si cumple con los datos de la interfaz
+  tasks = signal<Task[]>([
+    //Tipar la senial para saber si cumple con los datos de la interfaz
     {
       id: Date.now(),
       title: 'Crear proyecto',
@@ -43,11 +44,23 @@ export class HomeComponent {
   /* Método para eliminar elemento del array */
   deleteTask(index: number) {
     //           Filter para no mutar el array    Arrow function
-    this.tasks.update((tasks) =>
-      tasks.filter((task, position) => position !== index)
+    this.tasks.update((tasks) => tasks.filter((task, position) => position !== index)
     );
     //  array- elementos del arreglo anterior -si filtra el array dando el elemento y su posición-preguntamos:si la posicion es diferente a la que están enviando por parametro
   }
 
-
+  /* metodo para actualizar  */
+  updateTask(index: number){
+    this.tasks.update((tasks) => {
+      return tasks.map((task, position) => { /* Con map vamos a rrecorrer todos los elementos y transformarlos- elemento y posicion actual */
+        if (position === index) { /* Si la posicion es igual a la mandada en el parametro*/
+          return {
+            ...task,
+            completed: !task.completed /* si se cumple el estado de completado va a cambiar */
+          }
+        }
+        return task;
+      })
+    })
+  }
 }
