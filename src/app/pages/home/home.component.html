@@ -25,7 +25,7 @@
           <!--al *ngFor se le pone el index para pasar la posicion al método deleteTask(i)-->
           <div class="view">
             <input class="toggle" type="checkbox" />
-            <label>{{ task }}</label>
+            <label>{{ task.title }}</label> <!--llamo al atributo del objeto-->
             <!--el elemento clisk se le asigna el método delete y se le pasa el parametro del indice-->
             <button class="destroy" (click)="deleteTask(i)"></button>
           </div>
