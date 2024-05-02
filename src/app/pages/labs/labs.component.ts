@@ -12,17 +12,18 @@ export class LabsComponent {
  //Array con signal para reactividad
   tasks = signal(['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes']);
 
-  name = signal('Mila');
+  name = signal('Nicolas');
   age = 27;
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
   //Declaro un objeto con sus propiedades
-  person = {
-    name: 'Nashe',
-    age: 18,
+  //Ahora usaré un signal para el objeto
+  person =signal({
+    name: 'Nicolas',
+    age: 5,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
-  };
+  });
 
   //Método de mostrar una alerta al dar click en el boton
   clickHandler(): void {
@@ -50,9 +51,18 @@ changeHandler(event: Event): void {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
   }
+
+  //Update de la edad del objeto
+  changeAge(event: Event){
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update(prevState => {
+      return {
+        ...prevState,
+        age: parseInt(newValue),
+      }
+    });
+  }
+
+
 }
-/*
-function Signal(arg0: string) {
-  throw new Error('Function not implemented.');
-}
-*/
