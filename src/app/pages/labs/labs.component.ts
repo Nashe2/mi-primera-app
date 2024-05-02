@@ -20,7 +20,7 @@ export class LabsComponent {
   //Declaro un objeto con sus propiedades
   //Ahora usaré un signal para el objeto
   person =signal({
-    name: 'Nicolas',
+    name: 'ana',
     age: 5,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   });
@@ -64,5 +64,16 @@ changeHandler(event: Event): void {
     });
   }
 
+  //Update del name del objeto
+  changeName(event: Event){
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update(prevState => {
+      return {
+        ...prevState,
+        name:newValue,
+      }
+    });
+  }
 
 }
