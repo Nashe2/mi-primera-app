@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
-
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Task } from './../../models/task.model';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -23,12 +26,21 @@ export class HomeComponent {
     },
   ]);
 
-  //Método de actualizacion de los elementos del arreglo tasks
-  changeHandler(event: Event) {
-    //funcion declarativa con parametro event
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value; //newTask es la variable del nuevo elemento, que el usuario introducirá por el teclado, value se refiere a ese valor introducido
-    this.addTask(newTask);
+  /* Controller de form */
+  newTaskCtrl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  });
+
+
+  changeHandler() {
+    if(this.newTaskCtrl.valid){
+      const value = this.newTaskCtrl.value;
+      this.addTask(value);
+      this.newTaskCtrl.setValue('');
+    }
   }
 
   addTask(title: string) {
