@@ -123,4 +123,9 @@ String template-Interpolación-Concatenación -> as , y va entre {{ }}-->
     </g>
   </svg>
 
+  <hr/> <!-- Division -->
+  <input type="number" [formControl]="widthCtrl" /> <!-- Le asigno el controller widthCtrl del form para escribir menos lineas de codigo -->
+  <!--     modifica los estilos especificos que le digamos en []
+  y tambien la unidad si es en rem, en px. Donde le asigno el controlador y el value que es mostrado abajo-->
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
 </div>

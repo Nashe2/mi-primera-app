@@ -30,7 +30,11 @@ export class LabsComponent {
   });
 
   //Controller para el forms
-  colorCtrl = new FormControl;
+  colorCtrl = new FormControl();
+  //Le asigno un tamaño inicial de 50 y la Properte binding noNullable es no nulo.
+  widthCtrl = new FormControl(50, {
+    nonNullable: true,
+  });
 
   //
   constructor(){
