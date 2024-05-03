@@ -11,17 +11,12 @@
         [formControl]="newTaskCtrl"
         (keydown.enter)="changeHandler()"
 
-      /><!--change es el cambio- funcion del evento-->
+      /><!--Con el form a traves del controller newTaskCtrl agrego una nueva tarea en el metodo changeHandler-->
     </div>
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <!--Esta etiqueta sirve para debugear el array  -->
-    <pre>
-      <code>
-        {{tasks() | json }}
-      </code>
-    </pre>
+
     <section class="main">
       <ul class="todo-list">
         <!--Directiva de control: *ngIf y *ngFor

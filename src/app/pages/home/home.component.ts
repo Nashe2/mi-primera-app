@@ -1,5 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Task } from './../../models/task.model';
 
@@ -29,17 +34,16 @@ export class HomeComponent {
   /* Controller de form */
   newTaskCtrl = new FormControl('', {
     nonNullable: true,
-    validators: [
-      Validators.required,
-    ]
+    validators: [Validators.required],
   });
 
-
   changeHandler() {
-    if(this.newTaskCtrl.valid){
-      const value = this.newTaskCtrl.value;
-      this.addTask(value);
-      this.newTaskCtrl.setValue('');
+    if (this.newTaskCtrl.valid) {
+      const value = this.newTaskCtrl.value.trim(); /*trim limpia los espacios que tenga un input ya sea al inicio o al final*/
+      if (value !== '') {
+        this.addTask(value);
+        this.newTaskCtrl.setValue('');
+      }
     }
   }
 
@@ -56,23 +60,27 @@ export class HomeComponent {
   /* Método para eliminar elemento del array */
   deleteTask(index: number) {
     //           Filter para no mutar el array    Arrow function
-    this.tasks.update((tasks) => tasks.filter((task, position) => position !== index)
+    this.tasks.update((tasks) =>
+      tasks.filter((task, position) => position !== index)
     );
     //  array- elementos del arreglo anterior -si filtra el array dando el elemento y su posición-preguntamos:si la posicion es diferente a la que están enviando por parametro
   }
 
   /* metodo para actualizar  */
-  updateTask(index: number){
+  updateTask(index: number) {
     this.tasks.update((tasks) => {
-      return tasks.map((task, position) => { /* Con map vamos a rrecorrer todos los elementos y transformarlos- elemento y posicion actual */
-        if (position === index) { /* Si la posicion es igual a la mandada en el parametro*/
+      return tasks.map((task, position) => {
+        /* Con map vamos a rrecorrer todos los elementos y transformarlos- elemento y posicion actual */
+        if (position === index) {
+          /* Si la posicion es igual a la mandada en el parametro*/
           return {
             ...task,
-            completed: !task.completed /* si se cumple el estado de completado va a cambiar */
-          }
+            completed:
+              !task.completed /* si se cumple el estado de completado va a cambiar */,
+          };
         }
         return task;
-      })
-    })
+      });
+    });
   }
 }
