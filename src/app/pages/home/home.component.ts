@@ -39,7 +39,8 @@ export class HomeComponent {
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
-      const value = this.newTaskCtrl.value.trim(); /*trim limpia los espacios que tenga un input ya sea al inicio o al final*/
+      const value =
+        this.newTaskCtrl.value.trim(); /*trim limpia los espacios que tenga un input ya sea al inicio o al final*/
       if (value !== '') {
         this.addTask(value);
         this.newTaskCtrl.setValue('');
@@ -83,4 +84,40 @@ export class HomeComponent {
       });
     });
   }
+
+  /* Metodo de actualizacion de la tarea al hacer doble click */
+  updateTaskEditingMode(index: number) {
+    this.tasks.update(prevState => {
+      return prevState.map((task, position) => {
+        if(position === index){
+          return {
+            ...task,
+            editing: true,
+          }
+        }
+        return {
+          ...task,
+          editing: false, /* Para evitar que se modifique más de uno al mismo tiempo */
+        }
+      })
+    });
+  }
+
+  /*Metodo para actualizar la tarea despues de presionar enter*/
+  updateTaskText(index: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.tasks.update(prevState => {
+      return prevState.map((task, position) => {
+        if(position === index){
+          return {
+            ...task,
+            title: input.value,
+            editing: false
+          }
+        }
+        return task;
+      })
+    });
+  }
+
 }
