@@ -119,13 +119,36 @@ String template-Interpolación-Concatenación -> as , y va entre {{ }}-->
   <!-- Estilos modo angular es con svg-->
   <svg>
     <g>
-      <rect x="0" y="0" height="100"  width="100" [attr.fill]="colorCtrl.value"/>
+      <rect
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        [attr.fill]="colorCtrl.value"
+      />
     </g>
   </svg>
 
-  <hr/> <!-- Division -->
-  <input type="number" [formControl]="widthCtrl" /> <!-- Le asigno el controller widthCtrl del form para escribir menos lineas de codigo -->
+  <hr /> <!-- Division -->
+  <input type="number" [formControl]="widthCtrl" />
+  <!-- Le asigno el controller widthCtrl del form para escribir menos lineas de codigo -->
   <!--     modifica los estilos especificos que le digamos en []
   y tambien la unidad si es en rem, en px. Donde le asigno el controlador y el value que es mostrado abajo-->
   <span class="box" [style.width.px]="widthCtrl.value"></span>
+  <hr />
+  <p>
+    <input type="text" [formControl]="nameCtrl" /> <br />
+    <!-- se muestra el estado: nombre invalido en el HTML a traves de una class
+      de message-error y otra clase.show al tener más de 3 los caracteres que
+      fueron definidos.
+      -->
+    <span
+      class="message-error"
+      [class.show]="nameCtrl.invalid && nameCtrl.touched"
+      >Nombre inválido
+    </span>
+  </p>
+  <p>
+    <input type="text">
+  </p>
 </div>

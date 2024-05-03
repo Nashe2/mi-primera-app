@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
@@ -13,8 +13,12 @@ export class LabsComponent {
   title = 'mi-primera-app';
   welcome = 'Bienvenido a mi primera aplicación Angular';
 
- //Array con signal para reactividad
-  tasks = signal(['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes']);
+  //Array con signal para reactividad
+  tasks = signal([
+    'Instalar el Angular CLI',
+    'Crear proyecto',
+    'Crear componentes',
+  ]);
 
   name = signal('Nicolas');
   age = 27;
@@ -23,7 +27,7 @@ export class LabsComponent {
 
   //Declaro un objeto con sus propiedades
   //Ahora usaré un signal para el objeto
-  person =signal({
+  person = signal({
     name: 'ana',
     age: 5,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
@@ -35,11 +39,19 @@ export class LabsComponent {
   widthCtrl = new FormControl(50, {
     nonNullable: true,
   });
+/*Controller con validaciones para validar el numero de caracteres del name
+si es valido o no se mostrará un estado1 con class en el HTML
+*/
+nameCtrl = new FormControl('nicolas', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3),
+    ]
+  });
 
   //
-  constructor(){
-    this.colorCtrl.valueChanges.subscribe ( value => {
-      console.log(value)
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log(value);
     });
   }
 
@@ -55,12 +67,12 @@ export class LabsComponent {
   }
 */
 
-//Reactividad. Cambia dinamicamente el valor
-changeHandler(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const newValue = input.value;
-  this.name.set(newValue);
-}
+  //Reactividad. Cambia dinamicamente el valor
+  changeHandler(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.name.set(newValue);
+  }
 
   //El método keydonwHandler usa ese evento para que cada vez que teclee
   //en el teclado el evento traiga el target (la información) al input
@@ -71,27 +83,26 @@ changeHandler(event: Event): void {
   }
 
   //Update de la edad del objeto
-  changeAge(event: Event){
+  changeAge(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
-    this.person.update(prevState => {
+    this.person.update((prevState) => {
       return {
         ...prevState,
         age: parseInt(newValue),
-      }
+      };
     });
   }
 
   //Update del name del objeto
-  changeName(event: Event){
+  changeName(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
-    this.person.update(prevState => {
+    this.person.update((prevState) => {
       return {
         ...prevState,
-        name:newValue,
-      }
+        name: newValue,
+      };
     });
   }
-
 }
