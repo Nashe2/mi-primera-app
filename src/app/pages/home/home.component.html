@@ -24,7 +24,8 @@
         eliminando o reemplazando elementos.
         *ngIf te permite incluir un elemento en el DOM sólo si una condición específica es verdadera.
         *ngFor se utiliza para repetir un elemento del DOM para cada elemento de una lista. -->
-        <li *ngFor="let task of tasks(); index as i">
+        <!-- Ahora agrege la class completed para marcar como completadas las tareas -->
+        <li *ngFor="let task of tasks(); index as i" [class.completed]="task.completed">
           <!--Dirctiva de control o estructural-->
           <!--al *ngFor se le pone el index para pasar la posicion al método deleteTask(i)-->
           <div class="view">
