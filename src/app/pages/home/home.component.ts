@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import {
   FormControl,
   NonNullableFormBuilder,
@@ -36,6 +36,22 @@ export class HomeComponent {
     nonNullable: true,
     validators: [Validators.required],
   });
+//ESTADOS COMPUTADOS
+  /* Usando un signal, hacemos un evento dentro de otros eventos con computed*/
+  filter = signal<'all' | 'pending' | 'completed'>('all');
+  tasksByFilter = computed(() => {
+    /* Elementos que van a reaccionar cuando ellos cambien*/
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if (filter === 'pending') {
+      return tasks.filter(task => !task.completed);
+    }
+    if (filter === 'completed') {
+      return tasks.filter(task => task.completed);
+    }
+    return tasks;
+  });
+
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
@@ -87,37 +103,41 @@ export class HomeComponent {
 
   /* Metodo de actualizacion de la tarea al hacer doble click */
   updateTaskEditingMode(index: number) {
-    this.tasks.update(prevState => {
+    this.tasks.update((prevState) => {
       return prevState.map((task, position) => {
-        if(position === index){
+        if (position === index) {
           return {
             ...task,
             editing: true,
-          }
+          };
         }
         return {
           ...task,
-          editing: false, /* Para evitar que se modifique más de uno al mismo tiempo */
-        }
-      })
+          editing:
+            false /* Para evitar que se modifique más de uno al mismo tiempo */,
+        };
+      });
     });
   }
 
   /*Metodo para actualizar la tarea despues de presionar enter*/
   updateTaskText(index: number, event: Event) {
     const input = event.target as HTMLInputElement;
-    this.tasks.update(prevState => {
+    this.tasks.update((prevState) => {
       return prevState.map((task, position) => {
-        if(position === index){
+        if (position === index) {
           return {
             ...task,
             title: input.value,
-            editing: false
-          }
+            editing: false,
+          };
         }
         return task;
-      })
+      });
     });
   }
 
+  changeFilter(filter: 'all' | 'pending' | 'completed'){
+    this.filter.set(filter);
+  }
 }
