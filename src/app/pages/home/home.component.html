@@ -44,7 +44,11 @@
             <!--el elemento clisk se le asigna el método delete y se le pasa el parametro del indice-->
             <button class="destroy" (click)="deleteTask(i)"></button>
           </div>
-          <input class="edit" (keydown.enter)="updateTaskText(i, $event)" [value]="task.title" />
+          <input
+            class="edit"
+            (keydown.enter)="updateTaskText(i, $event)"
+            [value]="task.title"
+          />
         </li>
         <!--
         <li class="completed">
@@ -89,13 +93,23 @@
           <!-- - Utilice la clase selected de scss en angular asignandole el
           computed filter, para filtrar el estado perteneciente, es decir,
           muestra como estilo dinamico el borde en color morado. -->
-          <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'" >All</a>
+          <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'"
+            >All</a
+          >
         </li>
         <li>
-          <a (click)="changeFilter('pending')" [class.selected]="filter() === 'pending'">Pending</a>
+          <a
+            (click)="changeFilter('pending')"
+            [class.selected]="filter() === 'pending'"
+            >Pending</a
+          >
         </li>
         <li>
-          <a (click)="changeFilter('completed')" [class.selected]="filter() === 'completed'">Completed</a>
+          <a
+            (click)="changeFilter('completed')"
+            [class.selected]="filter() === 'completed'"
+            >Completed</a
+          >
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
@@ -103,3 +117,26 @@
     </footer>
   </div>
 </section>
+
+<!--  Ejemplo de componentes material angular -->
+<!--
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+-->

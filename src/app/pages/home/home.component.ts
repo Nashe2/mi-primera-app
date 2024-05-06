@@ -8,11 +8,15 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Task } from './../../models/task.model';
+/* Ejemplo de componentes material angular */
+//import { MatCardModule } from '@angular/material/card';
+//import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule], // MatCardModule, MatButtonModule
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
