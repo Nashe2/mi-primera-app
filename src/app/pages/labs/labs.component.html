@@ -175,4 +175,20 @@ String template-Interpolación-Concatenación -> as , y va entre {{ }}-->
   <li><strong>La lista esta vacia</strong></li>
 }
 
+<h2>Switch</h2>
+@switch (person().name) {
+  @case ('nicolas') {
+    <p>Soy Nicolas</p>
+  }
+  @case ('julian') {
+    <p>Soy Julian</p>
+  }
+  @case ('ana') {
+    <p>Soy Ana</p>
+  }
+  @default {
+    <p>No soy nadie</p>
+  }
+}
+
 </div>
