@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+/* Elementos principales en la reactividad en angular: effect, computed, signal */
+import { Component, computed, inject, effect, signal, Injector } from '@angular/core';
 import {
   FormControl,
   NonNullableFormBuilder,
@@ -17,26 +18,40 @@ import { Task } from './../../models/task.model';
 })
 export class HomeComponent {
   //Array con signal para reactividad
-  tasks = signal<Task[]>([
-    //Tipar la senial para saber si cumple con los datos de la interfaz
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componentes',
-      completed: false,
-    },
-  ]);
+  tasks = signal<Task[]>([]);
 
   /* Controller de form */
   newTaskCtrl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required],
   });
-//ESTADOS COMPUTADOS
+
+injector = inject(Injector);
+
+  //LOCAL STORAGE
+  /* Se requiere de un constructor para los effect */
+  constructor() {}
+
+  ngOnInit() {
+    const storage = localStorage.getItem('tasks');
+    if (storage) {
+      /* JSON.parse  pasa a un objeto el string que usamos anteriormente */
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks); //tasks a inicializar
+    }
+    this.trackTasks();
+  }
+
+  trackTasks() {
+    effect(() => {
+      const tasks = this.tasks();
+      /* JSON.stringify: convierte un JSON a un string */
+      console.log(tasks);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, {injector: this.injector} );
+  }
+
+  //ESTADOS COMPUTADOS
   /* Usando un signal, hacemos un evento dentro de otros eventos con computed*/
   filter = signal<'all' | 'pending' | 'completed'>('all');
   tasksByFilter = computed(() => {
@@ -44,14 +59,13 @@ export class HomeComponent {
     const filter = this.filter();
     const tasks = this.tasks();
     if (filter === 'pending') {
-      return tasks.filter(task => !task.completed);
+      return tasks.filter((task) => !task.completed);
     }
     if (filter === 'completed') {
-      return tasks.filter(task => task.completed);
+      return tasks.filter((task) => task.completed);
     }
     return tasks;
   });
-
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
@@ -137,7 +151,7 @@ export class HomeComponent {
     });
   }
 
-  changeFilter(filter: 'all' | 'pending' | 'completed'){
+  changeFilter(filter: 'all' | 'pending' | 'completed') {
     this.filter.set(filter);
   }
 }
