@@ -167,4 +167,12 @@ String template-Interpolación-Concatenación -> as , y va entre {{ }}-->
     <i>Soy Nicolas y soy menor de 18</i>
   }
 
+  <h2>For</h2>
+  <!-- usa @empaty para listar -->
+@for (task of tasks(); track task; let i = $index) {
+  <li> {{ i }} {{ task }} </li>
+}@empty {
+  <li><strong>La lista esta vacia</strong></li>
+}
+
 </div>
