@@ -29,7 +29,7 @@ export class LabsComponent {
   //Ahora usaré un signal para el objeto
   person = signal({
     name: 'ana',
-    age: 5,
+    age: 20,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   });
 
